@@ -19,12 +19,12 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String xParam = req.getParameter("x");
+        String xListParam = req.getParameter("x_list");
         String yParam = req.getParameter("y");
         String rParam = req.getParameter("r");
 
-        if(xParam != null && yParam != null && rParam != null
-                && !xParam.isEmpty() && !yParam.isEmpty() && !rParam.isEmpty()) {
+        if(xListParam != null && yParam != null && rParam != null
+                && !xListParam.isEmpty() && !yParam.isEmpty() && !rParam.isEmpty()) {
             req.getRequestDispatcher("/check").forward(req, resp);
         } else {
             req.getRequestDispatcher("/form.jsp").forward(req, resp);

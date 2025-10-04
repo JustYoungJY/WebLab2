@@ -22,9 +22,16 @@ public class AreaCheckServlet extends HttpServlet {
         long startTime = System.currentTimeMillis();
 
         double y;
-        int x, r;
+        int r;
+        String xListParam = req.getParameter("x_list");
+
+        if (xListParam == null || xListParam.isEmpty()) {
+            req.setAttribute("error", "The X must be chosen (at least one)!");
+            req.getRequestDispatcher("/form.jsp").forward(req, resp);
+            return;
+        }
+
         try {
-            x = Integer.parseInt(req.getParameter("x"));
             y = Double.parseDouble(req.getParameter("y"));
             r = Integer.parseInt(req.getParameter("r"));
 
@@ -34,18 +41,6 @@ public class AreaCheckServlet extends HttpServlet {
             return;
         }
 
-        Validation validation = new Validation();
-        if(!validation.validateParameters(x, y, r)) {
-            req.setAttribute("error", "The parameters are out of the allowable range");
-            req.getRequestDispatcher("/form.jsp").forward(req, resp);
-            return;
-        }
-
-        boolean hit = validation.checkHit(x, y, r);
-        long executionTime = System.currentTimeMillis() - startTime;
-        String currentTime = LocalDateTime.now(ZoneId.of("Europe/Moscow"))
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
         HttpSession session = req.getSession();
         ResultListBean resultListBean = (ResultListBean) session.getAttribute("resultListBean");
         if (resultListBean == null) {
@@ -53,8 +48,36 @@ public class AreaCheckServlet extends HttpServlet {
             session.setAttribute("resultListBean", resultListBean);
         }
 
-        ResultBean resultBean = new ResultBean(x, y, r, currentTime, executionTime, hit);
-        resultListBean.addResult(resultBean);
+        Validation validation = new Validation();
+
+        String[] xValues = xListParam.split(",");
+        boolean allValid = true;
+
+        for (String xStr : xValues) {
+            try {
+                int x = Integer.parseInt(xStr.trim());
+
+                if(!validation.validateParameters(x, y, r)) {
+                    allValid = false;
+                    continue;
+                }
+
+                boolean hit = validation.checkHit(x, y, r);
+                long executionTime = System.currentTimeMillis() - startTime;
+                String currentTime = LocalDateTime.now(ZoneId.of("Europe/Moscow"))
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+                ResultBean resultBean = new ResultBean(x, y, r, currentTime, executionTime, hit);
+                resultListBean.addResult(resultBean);
+
+            } catch (NumberFormatException e) {
+                allValid = false;
+            }
+        }
+
+        if (!allValid) {
+            req.setAttribute("error", "One or more submitted parameters are out of the allowable range or invalid.");
+        }
 
         req.getRequestDispatcher("/form.jsp").forward(req, resp);
     }

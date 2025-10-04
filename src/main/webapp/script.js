@@ -1,28 +1,29 @@
 function validateForm() {
-    const strX = document.getElementById("x").value;
-    const x = parseFloat(strX.replace(",", "."));
+    const xChecks = document.querySelectorAll("input[name='x']:checked");
+    const xValues = Array.from(xChecks).map(checkbox => checkbox.value);
 
-    if(!Number.isFinite(x)){
-        return {isOk: false, message: "The X must be a number!"};
+    if (xValues.length === 0) {
+        return {isOk: false, message: "The X must be chosen (at least one)!"};
     }
 
-    if(x < -5 || x > 5) {
-        return {isOk: false, message: "The X must be in the range from -5 to 5!"};
+    const strY = document.getElementById("y").value;
+    const y = parseFloat(strY.replace(",", "."));
+
+    if (!Number.isFinite(y)) {
+        return {isOk: false, message: "The Y must be a number!"};
     }
 
-    const yCheck = document.querySelector("input[name='y']:checked");
-    if(!yCheck){
-        return {isOk: false, message: "The Y must be chosen!"};
+    if (y < -5 || y > 5) {
+        return {isOk: false, message: "The Y must be in the range from -5 to 5!"};
     }
-    const y = Number(yCheck.value);
 
     const rCheck = document.querySelector("input[name='r']:checked");
-    if(!rCheck){
+    if (!rCheck) {
         return {isOk: false, message: 'The R must be chosen!'};
     }
     const r = Number(rCheck.value);
 
-    return {isOk: true, x, y, r};
+    return {isOk: true, xValues, y, r};
 }
 
 function addRowToTable(data) {
@@ -63,12 +64,39 @@ form.addEventListener("submit", function(event) {
     event.preventDefault();
 
     const validation = validateForm();
-    if(!validation.isOk) {
-        console.error("Validation error:", validation.message); // добавил для отладки
+    if (!validation.isOk) {
         showError(validation.message);
         return;
     }
 
+    const { xValues, y, r } = validation;
+    const xChecks = document.querySelectorAll("input[name='x']");
+
+    const xHiddenInput = document.createElement('input');
+    xHiddenInput.type = 'hidden';
+    xHiddenInput.name = 'x_list';
+    xHiddenInput.value = xValues.join(',');
+    form.appendChild(xHiddenInput);
+
+    const yInput = document.createElement('input');
+    yInput.type = 'hidden';
+    yInput.name = 'y';
+    yInput.value = y;
+    form.appendChild(yInput);
+
+    const rInput = document.createElement('input');
+    rInput.type = 'hidden';
+    rInput.name = 'r';
+    rInput.value = r;
+    form.appendChild(rInput);
+
+    xChecks.forEach(checkbox => checkbox.name = 'temp_x');
+
     form.action = "";
     form.submit();
+
+    xChecks.forEach(checkbox => checkbox.name = 'x');
+    form.removeChild(xHiddenInput);
+    form.removeChild(yInput);
+    form.removeChild(rInput);
 });

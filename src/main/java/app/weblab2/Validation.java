@@ -7,12 +7,12 @@ import java.util.Map;
 public class Validation {
 
     public boolean validateParameters(int x, double y, int r) {
-        if (x < -5 || x > 5) {
+        int[] validXValues = {-5, -4, -3, -2, -1, 0, 1, 2, 3};
+        if (!Arrays.stream(validXValues).anyMatch(val -> val == x)) {
             return false;
         }
 
-        int[] validYValues = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
-        if (!Arrays.stream(validYValues).anyMatch(val -> val == y)) {
+        if (y <= -5 || y >= 5) {
             return false;
         }
 

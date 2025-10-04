@@ -19,28 +19,28 @@
       <form id="point-form" method="POST" action="">
         <table>
           <tr>
-            <td><label for="x">Enter X:</label></td>
-            <td><input type="number" step="0.01" min="-5" max="5" id="x" name="x" required></td>
-          </tr>
-          <tr>
-            <td>Choose Y:</td>
+            <td>Choose X:</td>
             <td>
-              <div class="radio-container">
+              <div class="checkbox-container">
                 <table>
                   <tr>
-                    <td><input type="radio" id="y-4" name="y" value="-4"><label for="y-4">-4</label></td>
-                    <td><input type="radio" id="y-3" name="y" value="-3"><label for="y-3">-3</label></td>
-                    <td><input type="radio" id="y-2" name="y" value="-2"><label for="y-2">-2</label></td>
-                    <td><input type="radio" id="y-1" name="y" value="-1"><label for="y-1">-1</label></td>
-                    <td><input type="radio" id="y0" name="y" value="0"><label for="y0">0</label></td>
-                    <td><input type="radio" id="y1" name="y" value="1"><label for="y1">1</label></td>
-                    <td><input type="radio" id="y2" name="y" value="2"><label for="y2">2</label></td>
-                    <td><input type="radio" id="y3" name="y" value="3"><label for="y3">3</label></td>
-                    <td><input type="radio" id="y4" name="y" value="4"><label for="y4">4</label></td>
+                    <td><input type="checkbox" id="x-5" name="x" value="-5"><label for="x-5">-5</label></td>
+                    <td><input type="checkbox" id="x-4" name="x" value="-4"><label for="x-4">-4</label></td>
+                    <td><input type="checkbox" id="x-3" name="x" value="-3"><label for="x-3">-3</label></td>
+                    <td><input type="checkbox" id="x-2" name="x" value="-2"><label for="x-2">-2</label></td>
+                    <td><input type="checkbox" id="x-1" name="x" value="-1"><label for="x-1">-1</label></td>
+                    <td><input type="checkbox" id="x0" name="x" value="0"><label for="x0">0</label></td>
+                    <td><input type="checkbox" id="x1" name="x" value="1"><label for="x1">1</label></td>
+                    <td><input type="checkbox" id="x2" name="x" value="2"><label for="x2">2</label></td>
+                    <td><input type="checkbox" id="x3" name="x" value="3"><label for="x3">3</label></td>
                   </tr>
                 </table>
               </div>
             </td>
+          </tr>
+          <tr>
+            <td><label for="y">Enter Y:</label></td>
+            <td><input type="number" step="0.01" min="-5" max="5" id="y" name="y" required></td>
           </tr>
           <tr>
             <td>Choose R:</td>
