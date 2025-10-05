@@ -1,7 +1,7 @@
 package app.weblab2.Beans;
 
 public class ResultBean {
-    private int x;
+    private double x;
     private double y;
     private int r;
     private String currentTime;
@@ -11,7 +11,7 @@ public class ResultBean {
     public ResultBean() {
     }
 
-    public ResultBean(int x, double y, int r, String currentTime, long executionTime, boolean hit) {
+    public ResultBean(double x, double y, int r, String currentTime, long executionTime, boolean hit) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -20,11 +20,11 @@ public class ResultBean {
         this.hit = hit;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 

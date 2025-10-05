@@ -33,7 +33,14 @@ function addRowToTable(data) {
     trow.insertCell(0).textContent = data.x;
     trow.insertCell(1).textContent = data.y;
     trow.insertCell(2).textContent = data.r;
-    trow.insertCell(3).textContent = data.result ? "hit" : "did not hit";
+
+    const resultCell = trow.insertCell(3);
+    if (data.result) {
+        resultCell.innerHTML = '<span style="color: #27ae60; font-weight: bold;">Hit</span>';
+    } else {
+        resultCell.innerHTML = '<span style="color: #e74c3c;">Miss</span>';
+    }
+
     trow.insertCell(4).textContent = data.executionTime;
     trow.insertCell(5).textContent = data.currentTime;
 }

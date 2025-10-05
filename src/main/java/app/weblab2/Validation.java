@@ -6,13 +6,12 @@ import java.util.Map;
 
 public class Validation {
 
-    public boolean validateParameters(int x, double y, int r) {
-        int[] validXValues = {-5, -4, -3, -2, -1, 0, 1, 2, 3};
-        if (!Arrays.stream(validXValues).anyMatch(val -> val == x)) {
+    public boolean validateParameters(double x, double y, int r) {
+        if (x < -5 || x > 5) {
             return false;
         }
 
-        if (y <= -5 || y >= 5) {
+        if (y < -5 || y > 5) {
             return false;
         }
 
@@ -20,13 +19,13 @@ public class Validation {
         return Arrays.stream(validRValues).anyMatch(val -> val == r);
     }
 
-    public boolean checkHit(int x, double y, int r) {
+    public boolean checkHit(double x, double y, int r) {
 
         if (x <= 0 && y <= 0 && y >= -x - r) { // triangle
             return true;
         }
 
-        if (x >= 0 && y>= 0 && x <= r && y <= r/2) {  //rectangle
+        if (x >= 0 && y>= 0 && x <= r && y <= r/2.0) {  //rectangle
             return true;
         }
 

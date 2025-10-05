@@ -241,6 +241,60 @@ table table {
 }
 
 
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    display: inline-block;
+    color: #d8d7d7;
+    margin: 0 1px;
+    transition: color 0.3s ease;
+}
+
+input[type="checkbox"] + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #1b2630;
+    border-radius: 4px;
+    background: #2d2d3a;
+    transition: all 0.3s ease;
+}
+
+input[type="checkbox"]:checked + label:before {
+    border-color: #9b59b6;
+    background: #9b69b6;
+    box-shadow: 0 0 5px rgba(155, 89, 182, 0.8);
+}
+
+input[type="checkbox"] + label:hover:before {
+    border-color: #bb8fed;
+}
+
+input[type="checkbox"]:checked + label {
+    color: #bb8fed;
+    font-weight: bold;
+}
+
+.checkbox-container {
+    margin-left: 37px;
+    display: inline-block;
+    max-width: 100%;
+}
+
+#area-canvas {
+    margin-left: 100px;
+}
+
+
+
 @media (max-width: 1000px) {
     header {
         flex-direction: column;

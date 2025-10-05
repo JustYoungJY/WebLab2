@@ -55,7 +55,7 @@ public class AreaCheckServlet extends HttpServlet {
 
         for (String xStr : xValues) {
             try {
-                int x = Integer.parseInt(xStr.trim());
+                double x = Double.parseDouble(xStr.trim());
 
                 if(!validation.validateParameters(x, y, r)) {
                     allValid = false;
@@ -79,6 +79,6 @@ public class AreaCheckServlet extends HttpServlet {
             req.setAttribute("error", "One or more submitted parameters are out of the allowable range or invalid.");
         }
 
-        req.getRequestDispatcher("/form.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/");
     }
 }

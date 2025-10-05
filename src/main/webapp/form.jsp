@@ -11,7 +11,7 @@
 <header>
   <p>Name: Izaak German Konstantinovich</p>
   <p>Group: P3217</p>
-  <p>Varik: 489406</p>
+  <p>Varik: 2108</p>
 </header>
 <table id="main-table">
   <tr>
@@ -67,8 +67,7 @@
     </td>
   </tr>
   <tr>
-    <td><img src="img.png" id="area-graph" alt="Graph"></td>
-
+    <td><canvas id="area-canvas" width="350" height="350"></canvas></td>
   </tr>
   <tr>
     <td colspan="2">
@@ -113,5 +112,6 @@
   </tr>
 </table>
 <script src="script.js"></script>
+<script src="graph.js"></script>
 </body>
 </html>
