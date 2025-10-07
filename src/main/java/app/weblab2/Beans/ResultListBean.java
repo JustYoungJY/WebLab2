@@ -1,9 +1,15 @@
 package app.weblab2.Beans;
 
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultListBean {
+@Named("resultListBean")
+@SessionScoped
+public class ResultListBean implements Serializable {
 
     private List<ResultBean> results;
 

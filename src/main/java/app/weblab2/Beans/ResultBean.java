@@ -1,6 +1,8 @@
 package app.weblab2.Beans;
 
-public class ResultBean {
+import java.io.Serializable;
+
+public class ResultBean implements Serializable {
     private double x;
     private double y;
     private int r;
@@ -8,7 +10,7 @@ public class ResultBean {
     private long executionTime;
     private boolean hit;
 
-    public ResultBean() {
+    public ResultBean(){
     }
 
     public ResultBean(double x, double y, int r, String currentTime, long executionTime, boolean hit) {

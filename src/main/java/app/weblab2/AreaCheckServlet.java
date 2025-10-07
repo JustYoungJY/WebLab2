@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.inject.Inject;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,6 +17,9 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet("/check")
 public class AreaCheckServlet extends HttpServlet {
+    @Inject
+    private ResultListBean resultListBean;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -39,13 +43,6 @@ public class AreaCheckServlet extends HttpServlet {
             req.setAttribute("error", "Please enter a valid number");
             req.getRequestDispatcher("/form.jsp").forward(req, resp);
             return;
-        }
-
-        HttpSession session = req.getSession();
-        ResultListBean resultListBean = (ResultListBean) session.getAttribute("resultListBean");
-        if (resultListBean == null) {
-            resultListBean = new ResultListBean();
-            session.setAttribute("resultListBean", resultListBean);
         }
 
         Validation validation = new Validation();

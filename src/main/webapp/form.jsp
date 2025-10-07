@@ -84,8 +84,8 @@
           </tr>
           </thead>
           <tbody id="results-body">
-          <c:if test="${not empty sessionScope.resultListBean.results}">
-            <c:forEach items="${sessionScope.resultListBean.results}" var="entry">
+          <c:if test="${not empty resultListBean.results}">
+            <c:forEach items="${resultListBean.results}" var="entry">
               <tr>
                 <td><c:out value="${entry.x}"/></td>
                 <td><c:out value="${entry.y}"/></td>
